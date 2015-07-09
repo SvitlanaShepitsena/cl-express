@@ -7,8 +7,8 @@ var reload = bs.reload;
 
 gulp.task('serve', ['browser-sync', 'jade'], function () {
     gulp.watch('views/**/*.jade', gulp.run('jade'));
-
     gulp.watch('views/**/*.html').on('change', bs.reload);
+
     bs.watch('routes/**/*.js').on('change', function () {
         setTimeout(function reload() {
             bs.reload({
@@ -16,8 +16,6 @@ gulp.task('serve', ['browser-sync', 'jade'], function () {
             });
         }, 500);
     });
-
-
 });
 
 gulp.task('jade', function () {
@@ -26,7 +24,7 @@ gulp.task('jade', function () {
             pretty: true
         }))
         .pipe(gulp.dest('views/'))
-})
+});
 
 gulp.task('browser-sync', ['nodemon'], function () {
     bs.init(null, {
@@ -37,6 +35,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
         port: 7000,
     });
 });
+
 gulp.task('nodemon', function (cb) {
 
     var started = false;

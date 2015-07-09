@@ -1,0 +1,28 @@
+{
+  "name": "cl-express",
+  "version": "0.0.0",
+  "homepage": "https://github.com/SvitlanaShepitsena/cl-express",
+  "authors": [
+    "chicagobusinessintelligence2@gmail.com <Ytrewq12>"
+  ],
+  "description": "test angular with node",
+  "main": "main/app.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "node",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.2"
+  }
+}
