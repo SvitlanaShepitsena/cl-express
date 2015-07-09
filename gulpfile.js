@@ -7,8 +7,8 @@ var reload = bs.reload;
 
 
 
-gulp.task('serve', ['browser-sync', 'jade'], function () {
-    gulp.watch('views/**/*.jade', gulp.run('jade'));
+gulp.task('serve', ['browser-sync'], function () {
+    gulp.watch('views/**/*.jade').on('change', bs.reload);
     gulp.watch('views/**/*.html').on('change', bs.reload);
 
     bs.watch('routes/**/*.js').on('change', function () {

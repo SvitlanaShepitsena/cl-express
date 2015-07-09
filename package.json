@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.0",
     "express-useragent": "^0.1.9",
+    "firebase": "^2.2.7",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
