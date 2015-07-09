@@ -1,7 +1,9 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var bs = require('browser-sync');
+var wiredep = require('wiredep').stream;
 var reload = bs.reload;
+
 
 
 
@@ -41,7 +43,7 @@ gulp.task('nodemon', function (cb) {
     var started = false;
 
     return $.nodemon({
-        script: 'app.js'
+        script: 'server.js'
     }).on('start', function () {
         if (!started) {
             cb();
@@ -57,4 +59,13 @@ gulp.task('nodemon', function (cb) {
             }, 500);
         });
     ;
+});
+
+gulp.task('bower', function () {
+    gulp.src('./app/index.html')
+        .pipe(wiredep({
+            optional: 'configuration',
+            goes: 'here'
+        }))
+        .pipe(gulp.dest('./app'));
 });
