@@ -25,13 +25,6 @@ gulp.task('serve', ['browser-sync'], function () {
     });
 });
 
-gulp.task('jade', function () {
-    return gulp.src('views/**/*.jade')
-        .pipe($.jade({
-            pretty: true
-        }))
-        .pipe(gulp.dest('views/'))
-});
 
 gulp.task('browser-sync', ['nodemon'], function () {
     bs.init(null, {
