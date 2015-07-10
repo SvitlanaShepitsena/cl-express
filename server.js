@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//angRouter.use(express.static(__dirname + '/app'));
 
 
 
@@ -23,19 +24,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+
+var angRouter = express.Router();
+var expRouter = express.Router();
+
+app.use('/home',expRouter);
+app.use('/',expRouter);
 
 
-app.get('/', function (req, res, next) {
+expRouter.get('/', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
     console.log(userAgent);
 
     if ((userAgent.indexOf('facebookexternalhit') <= -1)) {
         console.log('angular');
-        res.redirect('/home');
+        next();
+        //res.redirect('/home');
 
     } else {
+        console.log('node');
 
         var vm = {
             title: 'Our title'
@@ -49,14 +57,12 @@ app.get('/', function (req, res, next) {
     }
 });
 
-app.get('/home', function (req, res,next) {
+expRouter.get('/home', function (req, res,next) {
     res.sendFile('index.html', {root: __dirname + '/app'});
-    next();
-})
-app.use('/home', express.static(__dirname + '/app'));
+});
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+expRouter.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -78,13 +84,15 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+expRouter.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
         error: {}
     });
 });
+
+
 
 app.listen(5000, function () {
     console.log('listen on port 5000');
