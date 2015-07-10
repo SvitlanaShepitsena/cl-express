@@ -42,7 +42,7 @@ app.get('/', function (req, res, next) {
     } else {
 
         var ref = new Firebase('https://sv-app-test.firebaseio.com')
-        ref.child("articles/-JtoFm3jopeKjIt-CrFE").on("value", function (snapshot) {
+        ref.child("articles/-JsRqcUVbvFCNBI7Dr3Q").on("value", function (snapshot) {
             var article = snapshot.val();
             res.render('home.jade', {article: article});
         });

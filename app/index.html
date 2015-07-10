@@ -11,7 +11,7 @@
 <body ng-controller="MainCtrl">
 <h1>Article Ang</h1>
 <div>{{article.title}}</div>
-<div>{{article.body}}</div>
+<div ng-bind-html="article.body"></div>
 
 
 <!--&lt;!&ndash; bower:js &ndash;&gt;-->
@@ -22,6 +22,7 @@
 
 <!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js"></script>
 
 <!-- Firebase -->
 <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
