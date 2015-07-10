@@ -2,9 +2,10 @@ extends layout
 
 block content
     div(layout-sm='column', layout-md='column', layout-gt-md='row', layout-lg='column', layout-gt-lg='column')
-        each post in vm.posts
-            .card.m.md-padding
-                span.display-block.fs-display-1.text-center !{post.title}
-                md-divider(class='mt mb+')
-                span.display-block.fs-title !{post.subtitle}
-                p !{post.body}
+        if vm.posts!== undefined
+            each post in vm.posts
+                .card.m.md-padding
+                    span.display-block.fs-display-1.text-center !{post.title}
+                    md-divider(class='mt mb+')
+                    span.display-block.fs-title !{post.subtitle}
+                    p !{post.body}
