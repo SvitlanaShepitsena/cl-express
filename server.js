@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var parseString = require('xml2js').parseString;
+var http = require('http');
 
 var Firebase = require("firebase");
 
@@ -45,13 +46,83 @@ expRouter.get('/', function (req, res, next) {
         var ref = new Firebase('https://sv-app-test.firebaseio.com')
         ref.child("posts").on("value", function (snapshot) {
             var posts = snapshot.val();
-            vm.posts=posts;
-            res.render('home.jade', {vm:vm});
+            vm.posts = posts;
+            res.render('home.jade', {vm: vm});
         });
     }
 });
+expRouter.get('/events/one-event-gallery', function (req, res, next) {
+
+    var userAgent = req.get('user-agent');
+    console.log(userAgent);
+
+    //if (userAgent.indexOf('facebookexternalhit') !== -1) {
+    if (userAgent.indexOf('facebookexternalhit') === -1) {
+        //res.redirect('/events/one-event-gallery');
+        next();
+    } else {
+        console.log('node');
+        var vm = {
+            title: 'Event Gallery'
+        }
+
+        var bucketUrl = "http://s3-us-west-2.amazonaws.com/chicagoview/";
+
+        xmlToJson(bucketUrl, function (err, data) {
+            if (err) {
+                // Handle this however you like
+                return console.err(err);
+            }
+            var myRegexp = /<key>([^<])+/gi;
+            var match;
+            var files = [];
+
+            var myString = data;
+            match = myRegexp.exec(myString);
+            while (match !== null) {
+                if (match) {
+
+                    var fileName = match[0].replace('<Key>', '');
+                    files.push(fileName);
+                }
+                match = myRegexp.exec(myString);
+            }
+            vm.files = files;
+            res.render('gallery', {vm: vm})
+        });
+
+        //http.get(bucketUrl, function (res) {
+        //    console.log("Got response: " + res.statusCode);
+        //
+        //    var myRegexp = /<key>([^<])+/gi;
+        //    var match;
+        //    var files = [];
+        //
+        //    var myString = res;
+        //    match = myRegexp.exec(myString);
+        //    while (match !== null) {
+        //        if (match) {
+        //
+        //            var fileName = match[0].replace('<Key>', '');
+        //            files.push(fileName);
+        //        }
+        //        match = myRegexp.exec(myString);
+        //    }
+        //    var b = 1;
+        //    var breakPoint = 1;
+        //
+        //}).on('error', function (e) {
+        //    console.log("Got error: " + e.message);
+        //});
+    }
+});
+
 expRouter.use(express.static(__dirname + '/app'));
 expRouter.get('/home', function (req, res, next) {
+    res.sendFile('index.html', {root: __dirname + '/app'});
+});
+
+expRouter.get('/events/one-event-gallery', function (req, res, next) {
     res.sendFile('index.html', {root: __dirname + '/app'});
 });
 
@@ -97,3 +168,25 @@ module.exports = app;
 //});
 //
 //res.send(userAgent);
+function xmlToJson(url, callback) {
+    var req = http.get(url, function (res) {
+        var xml = '';
+
+        res.on('data', function (chunk) {
+            xml += chunk;
+        });
+
+        res.on('error', function (e) {
+            callback(e, null);
+        });
+
+        res.on('timeout', function (e) {
+            callback(e, null);
+        });
+
+        res.on('end', function () {
+            //console.log(xml);
+            callback(null, xml);
+        });
+    });
+}

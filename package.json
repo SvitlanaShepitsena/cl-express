@@ -15,7 +15,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3"
+    "stylus": "0.42.3",
+    "xml2js": "^0.4.9"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
