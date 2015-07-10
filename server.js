@@ -23,24 +23,30 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use('/app', express.static(__dirname + '/app'));
 
-
-
 app.get('/', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
     console.log(userAgent);
-    if (userAgent!=='facebookexternalhit/1.1') {
+    var ref = new Firebase('https://sv-app-test.firebaseio.com/agent');
+    ref.set({
+        agent:userAgent
+    });
 
-        res.sendFile('index.html', {root: __dirname + '/app'});
+    res.send(userAgent);
 
-    } else {
 
-        var ref = new Firebase('https://sv-app-test.firebaseio.com')
-        ref.child("articles/-JtoFm3jopeKjIt-CrFE").on("value", function (snapshot) {
-            var article = snapshot.val();
-            res.render('home.jade', {article: article});
-        });
-    }
+    //if (userAgent!=='facebookexternalhit/1.1') {
+    //
+    //    res.sendFile('index.html', {root: __dirname + '/app'});
+    //
+    //} else {
+    //
+    //    var ref = new Firebase('https://sv-app-test.firebaseio.com')
+    //    ref.child("articles/-JtoFm3jopeKjIt-CrFE").on("value", function (snapshot) {
+    //        var article = snapshot.val();
+    //        res.render('home.jade', {article: article});
+    //    });
+    //}
 });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
