@@ -16,7 +16,7 @@
                             for (var i = 0; i < files.length; i++) {
                                 var file = files[i];
                                 Upload.upload({
-                                        url: 'https://svet.com.s3.amazonaws.com/', //S3 upload url including bucket name
+                                        url: 'https://chicagopics.s3.amazonaws.com/', //S3 upload url including bucket name
                                         method: 'POST',
                                         fields : {
                                             key: file.name, // the key to store the file on S3, could be file name or customized

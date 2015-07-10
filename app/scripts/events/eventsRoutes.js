@@ -20,11 +20,6 @@
                     controller: "EventCalendarCtrl as eventCalendar",
                     templateUrl: "scripts/events/views/event-calendarCtrl.html"
                 })
-                .state("app.events.field", {
-                    url: "/events/field-event/:year",
-                    controller: "FieldEventCtrl as fieldEvent",
-                    templateUrl: "scripts/events/views/field-eventCtrl.html"
-                })
                 .state("app.events.ravinia", {
                     url: "/ravinia-event",
                     controller: "RaviniaEventCtrl as raviniaEvent",
