@@ -47,6 +47,7 @@ expRouter.get('/', function (req, res, next) {
         ref.child("posts").on("value", function (snapshot) {
             var posts = snapshot.val();
             vm.posts = posts;
+
             res.render('home.jade', {vm: vm});
         });
     }
@@ -88,6 +89,10 @@ expRouter.get('/events/one-event-gallery', function (req, res, next) {
                 match = myRegexp.exec(myString);
             }
             vm.files = files;
+            vm.og={
+                title:'Album Name',
+                img:bucketUrl+files[0]
+            }
             res.render('gallery', {vm: vm})
         });
 

@@ -1,10 +1,15 @@
 doctype html
 html
     head
-        title my
+        title My title
         link(rel='stylesheet' href=' ../app/bower_components/angular-material/angular-material.min.css')
         link(rel='stylesheet' href=' ../app/bower_components/lumx/dist/lumx.css')
-        link(rel='stylesheet' href=' ../app/bower_components/bootstrap/dist/css/bootstrap.min.css')
+
+
+        if vm !== undefined
+            meta(property='og:title' content='#{vm.og.title}')
+            meta(property='og:image' content='#{vm.og.img}')
+
         link(rel='stylesheet' href=' ../app/styles/main.css')
     body
         div(style='width:1200px;margin:0px auto')
