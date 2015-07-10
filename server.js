@@ -19,28 +19,27 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use('/app', express.static(__dirname + '/app'));
 
-var useragent = require('express-useragent');
-app.use(useragent.express());
+
 
 app.get('/', function (req, res, next) {
-    var browser = req.useragent;
-    console.log(browser);
-    if (browser.source !== 'facebookexternalhit/1.1') {
+
+    var userAgent = req.get('user-agent');
+    console.log(userAgent);
+    if (userAgent!=='facebookexternalhit/1.1') {
 
         res.sendFile('index.html', {root: __dirname + '/app'});
 
     } else {
 
-        //var ref = new Firebase('https://sv-app-test.firebaseio.com')
-        //ref.child("articles/-JtoFm3jopeKjIt-CrFE").on("value", function (snapshot) {
-        //    var article = snapshot.val();
-        //    res.render('home.jade', {article: article});
-        //});
-        res.render('agent.jade',{agent:browser});
-            //res.render('home.jade', {article: article});
+        var ref = new Firebase('https://sv-app-test.firebaseio.com')
+        ref.child("articles/-JtoFm3jopeKjIt-CrFE").on("value", function (snapshot) {
+            var article = snapshot.val();
+            res.render('home.jade', {article: article});
+        });
     }
 });
 // catch 404 and forward to error handler
