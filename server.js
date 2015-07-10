@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 var expRouter = express.Router();
-expRouter.use(express.static(__dirname + '/app'));
 
 app.use('/', expRouter);
 
@@ -31,13 +30,11 @@ expRouter.get('/', function (req, res, next) {
     var userAgent = req.get('user-agent');
     console.log(userAgent);
 
-    if ((userAgent.indexOf('facebookexternalhit') <= -1)) {
-        console.log('angular');
+    if (userAgent.indexOf('facebookexternalhit') === -1) {
         res.redirect('/home');
 
     } else {
         console.log('node');
-
         var vm = {
             title: 'Our title'
         }
@@ -49,7 +46,7 @@ expRouter.get('/', function (req, res, next) {
         });
     }
 });
-
+expRouter.use(express.static(__dirname + '/app'));
 expRouter.get('/home', function (req, res, next) {
     res.sendFile('index.html', {root: __dirname + '/app'});
 });
