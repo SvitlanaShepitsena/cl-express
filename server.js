@@ -25,6 +25,7 @@ var expRouter = express.Router();
 
 app.use('/', expRouter);
 
+expRouter.use(express.static(__dirname + '/'));
 expRouter.get('/', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
