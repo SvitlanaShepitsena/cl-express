@@ -5,11 +5,13 @@ html
         link(rel='stylesheet' href=' ../app/bower_components/angular-material/angular-material.min.css')
         link(rel='stylesheet' href=' ../app/bower_components/lumx/dist/lumx.css')
         link(rel='stylesheet' href=' ../app/styles/main.css')
-
-        include header/header
-        div(style='float:left;display:block')
-            include menu/left-nav
-        div(style='float:left;display:block')
-            block content
-        div(style='float:right;display:block')
-            include menu/right-nav
+    body
+        div(style='width:1200px;margin:0px auto')
+            include header/header
+        div(style='width:1200px;margin:0px auto')
+            div(style='float:left;display:block;width:100px')
+                include menu/left-nav
+            div(style='float:left;display:block;width:1000px')
+                block content
+            div(style='float:right;display:block;width:100px')
+                include menu/right-nav
