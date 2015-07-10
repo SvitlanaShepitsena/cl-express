@@ -5,9 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//angRouter.use(express.static(__dirname + '/app'));
-
-
 
 var Firebase = require("firebase");
 
@@ -24,13 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-
-var angRouter = express.Router();
 var expRouter = express.Router();
+expRouter.use(express.static(__dirname + '/app'));
 
-app.use('/home',expRouter);
-app.use('/',expRouter);
-
+app.use('/', expRouter);
 
 expRouter.get('/', function (req, res, next) {
 
@@ -39,8 +33,7 @@ expRouter.get('/', function (req, res, next) {
 
     if ((userAgent.indexOf('facebookexternalhit') <= -1)) {
         console.log('angular');
-        next();
-        //res.redirect('/home');
+        res.redirect('/home');
 
     } else {
         console.log('node');
@@ -57,7 +50,7 @@ expRouter.get('/', function (req, res, next) {
     }
 });
 
-expRouter.get('/home', function (req, res,next) {
+expRouter.get('/home', function (req, res, next) {
     res.sendFile('index.html', {root: __dirname + '/app'});
 });
 
@@ -91,8 +84,6 @@ expRouter.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-
 
 app.listen(5000, function () {
     console.log('listen on port 5000');
