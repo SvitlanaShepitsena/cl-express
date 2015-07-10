@@ -35,7 +35,7 @@ app.get('/', function (req, res, next) {
     //res.send(userAgent);
 
 
-    if (userAgent.indexOf('facebookexternalhit')===-1) {
+    if (userAgent.indexOf('facebookexternalhit')!==-1) {
 
         res.sendFile('index.html', {root: __dirname + '/app'});
 

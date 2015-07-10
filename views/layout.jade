@@ -2,11 +2,12 @@ doctype html
 html
   head
     title= article.title
-    meta(property='og:title' content="#{article.title}")
+    meta(charset='UTF-8')
+
+    meta(property='og:title' content="!{article.title}")
     meta(property='og:image' content='#{article.img}')
     meta(property='og:description' content='#{article.summary}')
 
-    meta(charset='UTF-8')
     base(href="http://cl-express.herokuapp.com/" )
     link(rel='shortcut icon', href='favicon.ico?v=2')
   body
