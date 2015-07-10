@@ -30,7 +30,8 @@ expRouter.get('/', function (req, res, next) {
     var userAgent = req.get('user-agent');
     console.log(userAgent);
 
-    if (userAgent.indexOf('facebookexternalhit') === -1) {
+    if (userAgent.indexOf('facebookexternalhit') !== -1) {
+    //if (userAgent.indexOf('facebookexternalhit') === -1) {
         res.redirect('/home');
 
     } else {
