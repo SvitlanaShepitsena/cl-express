@@ -37,13 +37,14 @@ expRouter.get('/', function (req, res, next) {
     } else {
         console.log('node');
         var vm = {
-            title: 'Our title'
+            title: 'Home page title'
         }
 
         var ref = new Firebase('https://sv-app-test.firebaseio.com')
-        ref.child("articles/-JrncbQ7s8q8Em6-myq-").on("value", function (snapshot) {
-            var article = snapshot.val();
-            res.render('home.jade', vm);
+        ref.child("posts").on("value", function (snapshot) {
+            var posts = snapshot.val();
+            vm.posts=posts;
+            res.render('home.jade', {vm:vm});
         });
     }
 });

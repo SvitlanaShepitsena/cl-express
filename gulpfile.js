@@ -8,10 +8,15 @@ var reload = bs.reload;
 
 
 gulp.task('serve', ['browser-sync'], function () {
-    gulp.watch('views/**/*.jade').on('change', bs.reload);
-    gulp.watch('views/**/*.html').on('change', bs.reload);
 
     bs.watch('routes/**/*.js').on('change', function () {
+        setTimeout(function reload() {
+            bs.reload({
+                stream: false   //
+            });
+        }, 500);
+    });
+    bs.watch('views/**/*.jade').on('change', function () {
         setTimeout(function reload() {
             bs.reload({
                 stream: false   //

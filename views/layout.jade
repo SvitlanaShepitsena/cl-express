@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        title= title
+        title= vm.title
         meta(charset='UTF-8')
 
         meta(property='og:title' content="#{title}")
@@ -18,4 +18,5 @@ html
         style
             include ../app/styles/main.css
     body
+        include menu/left-nav
         block content
