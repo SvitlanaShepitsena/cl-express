@@ -1,0 +1,39 @@
+lx-dropdown(position='right')
+    a.btn.btn--l.btn--white.btn--fab.btn-flat(lx-dropdown-toggle=''
+    ng-class="{'mr+':gtSm}")
+        img.img-round(ng-src="{{user.isEditor()?editorAvatar:(user.avatar || defaultAvatar)}}" style='width:40px;height:40px;padding:5px' )
+    lx-dropdown-menu
+        ul
+            li
+                a.dropdown-link(ui-sref="app.user.dashboard({uid:user.userName})")
+                    i.mdi.mdi-view-dashboard.mr
+                    | {{'dashboard'|translate}}
+            li(ng-if='user.isAuthor()')
+                a.dropdown-link(ui-sref="app.user.news.articles({uid:user.userName})"  )
+                    i.mdi.mdi-view-list.mr
+                    span(ng-if='user.isReader()') {{'my-blog'|translate}}
+                    span(ng-if='user.isAuthor()') {{'my-articles'|translate}}
+            li(ng-if='user.isEditor()')
+                a.dropdown-link(ui-sref="app.user.homepage-rank({uid:user.userName})"  )
+                    i.mdi.mdi-view-list.mr
+                    span() {{'articles-ranking'|translate}}
+            li
+                a.dropdown-link(ui-sref="app.user.ad.promotion({uid:user.userName })" )
+                    i.fa.fa-bullhorn.mr
+                    span(ng-if='user.isCustomer()') {{'my-ad'|translate}}
+                    span(ng-if='user.isAuthor()  || user.isReader()') {{'my-classified'|translate}}
+            li.dropdown-divider(ng-if='user.isAuthor()')
+            li(ng-if='user.isAuthor()')
+                a.dropdown-link.tc-red-300(ui-sref='app.user.create-article({artType:"article",uid:user.userName})' )
+                    i.mdi.mdi-plus.mr
+                    | {{'add-news-article'|translate}}
+            li.dropdown-divider(ng-if='user.isEditor()')
+            li(ng-if='user.isEditor()')
+                a.dropdown-link.tc-red-300(ui-sref='app.user.create-article({artType:"blog",uid:user.userName})' )
+                    i.mdi.mdi-plus.mr
+                    | {{'add-blog-post'|translate}}
+            li.dropdown-divider
+            li
+                a.dropdown-link(ng-click='logout()')
+                    i.mdi.mdi-logout.mr
+                    | {{'logout'|translate}}

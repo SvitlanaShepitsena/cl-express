@@ -1,0 +1,11 @@
+.card.pb.bgc-grey-100(class='ml mr mb+')
+    div.p(layout='row' layout-align='space-between center')
+        sv-custom-label(tc="tc-grey-800" bgc="bgc-grey-300" label-padding="2px 4px" fs="fs-caption" section-title="{{oneNews.section}}" route-name='app.section' params="params"  text-decoration="none"  cursor-type="pointer" )
+        span.fs-caption.display-block(style='font-weight:300;text-decoration:underline') {{oneNews.topic|uppercase}}
+    .pl.pr
+        a.article-thumb-link.tc-grey-800(ui-sref='app.article({id:oneNews.fbkey})')
+            span.display-block.fs-subhead(ng-bind-html='safeParsing(oneNews.title)')
+        span.fs-caption.tc-grey-500(ng-bind-html='safeParsing(oneNews.authorNameFr)')
+        span.display-block.tc-grey-800.fs-body-1(ng-bind-html='safeParsing(oneNews.summary)')
+    div(layout='row' layout-align='end start' class='pr')
+        button.btn.btn--xs.btn--grey.btn--flat(ui-sref='app.article({id:oneNews.fbkey})' ) {{'read-more'|translate}} >>

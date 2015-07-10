@@ -1,0 +1,43 @@
+.card.pb
+    div.p.bgc-grey-100
+        span.display-block.fs-subhead.tc-red-800.sv-color-7(style='font-weight:600') {{topNews.topic|uppercase}}
+    md-divider
+    div(layout='row' layout-align='center')
+        a(ui-sref='app.article({id:topNews.fbkey})' )
+            .card__img.card__img--top(style='padding:0px !important')
+                sv-img-framed(sv-img = 'topNews.img' max-width='800' max-height='320')
+                span.mdc-display-inline-block.fs-title.tc-white.bgc-white.sv-color-8(style='padding:4px 8px;margin: 0px -15px')
+                    | {{topNews.title}}
+                span.mdc-display-inline-block.fs-title.tc-white.bgc-red-800.sv-color-7(style='padding:4px 8px;margin: 0px -15px')
+                    | {{topNews.title}}
+    .p
+        //a.article-thumb-link.tc-grey-800(ui-sref='app.article({id:topNews.fbkey})' )
+        //    .fs-title.tc-black-1(ng-bind-html='safeParsing(topNews.title)')
+        span.fs-caption.display-block.tc-grey-500 {{isFirst? 'Alexander Etman':topNews.author}}
+        span.fs-body-1.display-block(ng-bind-html="safeParsing(topNews.summary||(topNews.body|cut:50))")
+    div(layout='row' layout-align='end start' class='pr')
+        button.btn.btn--xs.btn--grey.btn--flat(ui-sref='app.article({id:topNews.fbkey})' ) {{'read-more'|translate}} >>
+        //sv-read-more(url='app.article({id:topNews.fbkey})' read-more="read-more")
+    //.p.bgc-grey-100
+        //sv-article-public-statistics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

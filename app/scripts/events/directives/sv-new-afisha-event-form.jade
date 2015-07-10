@@ -1,0 +1,51 @@
+form.m(name='eventAfishaForm' ng-submit='createAfishaEvent(eventAfishaForm.$valid)' flow-init novalidate sv-form-val )
+    md-input-container(style='padding-bottom:16px')
+        span.display-block.fs-body-2(style='font-size:12.96px;color:rgba(0, 0, 0, 0.258824);font-weight:bold') Event Type
+        md-radio-group(layout="row"
+        ng-model='event.type'
+        name="type"
+        required="")
+            md-radio-button(value='public') Public Event
+            md-radio-button(value='connection') Business Event
+            md-radio-button(value='community') Community Event
+    md-input-container
+        label Title
+        input(required='', name='title', ng-model='event.title')
+    div(layout='row')
+        md-input-container(flex)
+            label Date
+            input(type='date' required='' name='eventDate' ng-model='event.date')
+        md-input-container(flex)
+            label Start Time
+            input(type='time' required='' name='startTime' ng-model='event.startsAt')
+        md-input-container(flex)
+            label End Time (Optional)
+            input(type='time' name='endTime' ng-model='event.endsAt')
+    div(layout='row')
+        md-input-container(flex)
+            label Address
+            input(type='text' required='' name='address' ng-model='event.address')
+        md-input-container(flex)
+            label Location
+            input(type='text' required='' name='location' ng-model='event.location' )
+        md-input-container(flex)
+            label Location Web Site
+            input(type='text'  name='locationWeb' ng-model='event.locationWeb')
+    md-input-container
+        label About Event
+        textarea.bgc-grey-100(type='text' name='about' required='' rows='3' ng-model='event.about')
+    md-input-container
+        label Purchase Tickets
+        input(type='text' required='' name='tickets' ng-model='event.tickets')
+    div(layout='column' class='mb+')
+        span.mdc-display-inline-block.fs-subhead.tc-grey-700(class='mt') Upload Image
+        div(ng-if='event.editState')
+            img(ng-src='{{event.img}}')
+        sv-image-upload
+    div(class='mb+' layout="row" layout-align='end')
+        button.btn.btn--s.btn--raised.btn--black.bgc-grey-600.mr(type='submit')
+            i.mdi.mdi-save(ng-if='!event.$id') &nbsp Save
+            i.mdi.mdi-plus(ng-if='event.$id') &nbsp Save Changes
+        button.btn.btn--s.btn--raised.btn--white(ng-click='hide()')
+            i.mdi.mdi-close &nbsp
+            | Cancel

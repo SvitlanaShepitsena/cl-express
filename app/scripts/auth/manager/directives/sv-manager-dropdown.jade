@@ -1,0 +1,23 @@
+lx-dropdown(position='right')
+    a.btn.btn--l.btn--white.btn--fab.btn-flat(lx-dropdown-toggle=''
+    ng-class="{'mr+':gtSm}")
+        img.img-round(ng-src="{{user.avatar}}" style='width:40px;height:40px')
+    lx-dropdown-menu
+        ul
+            li
+                a.dropdown-link(ui-sref='app.manager.dashboard({uid:key})')
+                    i.mdi.mdi-view-dashboard &nbsp
+                    | {{'dashboard'|translate}}
+            li
+                a.dropdown-link(ui-sref='app.manager.users({uid:key})')
+                    i.mdi.mdi-emoticon &nbsp
+                    span {{'users'|translate}}
+            li
+                a.dropdown-link(ui-sref='app.manager.ad({uid:key})')
+                    i.fa.fa-bullhorn &nbsp
+                    span {{'ad'|translate}}
+            li.dropdown-divider
+            li
+                a.dropdown-link(ng-click='logout()')
+                    i.mdi.mdi-logout &nbsp
+                    | {{'logout'|translate}}

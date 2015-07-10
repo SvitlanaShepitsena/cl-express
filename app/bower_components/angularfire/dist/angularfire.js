@@ -4,9 +4,9 @@
  * provides you with the $firebase service which allows you to easily keep your $scope
  * variables in sync with your Firebase backend.
  *
- * AngularFire 1.1.2
+ * AngularFire 1.1.1
  * https://github.com/firebase/angularfire/
- * Date: 06/25/2015
+ * Date: 05/05/2015
  * License: MIT
  */
 (function(exports) {
@@ -68,8 +68,8 @@
    * var list = new ExtendedArray(ref);
    * </code></pre>
    */
-  angular.module('firebase').factory('$firebaseArray', ["$log", "$firebaseUtils", "$q",
-    function($log, $firebaseUtils, $q) {
+  angular.module('firebase').factory('$firebaseArray', ["$log", "$firebaseUtils",
+    function($log, $firebaseUtils) {
       /**
        * This constructor should probably never be called manually. It is used internally by
        * <code>$firebase.$asArray()</code>.
@@ -652,14 +652,16 @@
 
         var def     = $firebaseUtils.defer();
         var created = function(snap, prevChild) {
-          waitForResolution(firebaseArray.$$added(snap, prevChild), function(rec) {
+          var rec = firebaseArray.$$added(snap, prevChild);
+          $firebaseUtils.whenUnwrapped(rec, function(rec) {
             firebaseArray.$$process('child_added', rec, prevChild);
           });
         };
         var updated = function(snap) {
           var rec = firebaseArray.$getRecord($firebaseUtils.getKey(snap));
           if( rec ) {
-            waitForResolution(firebaseArray.$$updated(snap), function() {
+            var res = firebaseArray.$$updated(snap);
+            $firebaseUtils.whenUnwrapped(res, function() {
               firebaseArray.$$process('child_changed', rec);
             });
           }
@@ -667,7 +669,8 @@
         var moved   = function(snap, prevChild) {
           var rec = firebaseArray.$getRecord($firebaseUtils.getKey(snap));
           if( rec ) {
-            waitForResolution(firebaseArray.$$moved(snap, prevChild), function() {
+            var res = firebaseArray.$$moved(snap, prevChild);
+            $firebaseUtils.whenUnwrapped(res, function() {
               firebaseArray.$$process('child_moved', rec, prevChild);
             });
           }
@@ -675,25 +678,13 @@
         var removed = function(snap) {
           var rec = firebaseArray.$getRecord($firebaseUtils.getKey(snap));
           if( rec ) {
-            waitForResolution(firebaseArray.$$removed(snap), function() {
-               firebaseArray.$$process('child_removed', rec);
+            var res = firebaseArray.$$removed(snap);
+            $firebaseUtils.whenUnwrapped(res, function() {
+              firebaseArray.$$process('child_removed', rec);
             });
           }
         };
 
-        function waitForResolution(maybePromise, callback) {
-          var promise = $q.when(maybePromise);
-          promise.then(function(result){
-            if (result) {
-              callback(result);
-            }
-          });
-          if (!isResolved) {
-            resolutionPromises.push(promise);
-          }
-        }
-
-        var resolutionPromises = [];
         var isResolved = false;
         var error   = $firebaseUtils.batch(function(err) {
           _initComplete(err);
@@ -707,11 +698,7 @@
           destroy: destroy,
           isDestroyed: false,
           init: init,
-          ready: function() { return def.promise.then(function(result){
-            return $q.all(resolutionPromises).then(function(){
-              return result;
-            });
-          }); }
+          ready: function() { return def.promise; }
         };
 
         return sync;
@@ -2014,6 +2001,16 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 
           resolve: $q.when,
 
+          whenUnwrapped: function(possiblePromise, callback) {
+            if( possiblePromise ) {
+              utils.resolve(possiblePromise).then(function(res) {
+                if( res ) {
+                  callback(res);
+                }
+              });
+            }
+          },
+
           //TODO: Remove false branch and use only angular implementation when we drop angular 1.2.x support.
           promise: angular.isFunction($q) ? $q : Q,
 
@@ -2255,7 +2252,7 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
           /**
            * AngularFire version number.
            */
-          VERSION: '1.1.2',
+          VERSION: '1.1.1',
 
           allPromises: $q.all.bind($q)
         };

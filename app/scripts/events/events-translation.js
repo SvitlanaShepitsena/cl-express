@@ -1,0 +1,76 @@
+(function () {
+    'use strict'
+    angular.module('events')
+        .config(['$translateProvider', function ($translateProvider) {
+            $translateProvider.useCookieStorage();
+            $translateProvider.translations('en', {
+                'events': 'Events',
+                'event-photo-gallery': 'Event Photo Gallery',
+                'active-events': 'Active Events',
+                'cancel-registration': 'Cancel Registration',
+                'ended-events': 'Ended Events',
+                'save-changes': 'Save Changes',
+                'event-type': 'Event Type',
+                'chicago-community-event': 'Chicago Community Event',
+                'all-events': 'All Events',
+                'activity-events': 'Activity and Events',
+                'purchase-tickets': 'Purchase Tickets',
+                'visited-events': 'Visited Events',
+                'planned-events': 'Planned Events',
+                'create-event': 'Create an Event',
+                'connection-event': 'Connection Event',
+                'public-event': 'Public Event',
+                'network-events': 'Network Events',
+                'public-events': 'Public Events',
+                'new-event': 'New Event',
+                'friends': 'Friends',
+                'events-calendar': 'Events 2015',
+                'upcoming-event': 'Upcoming Event',
+                'families-event': 'Families are goings',
+                'join-tip': 'Click to register for visiting this event',
+                'unlink-tip': 'Click to un-register from visiting this event',
+                'join': 'Register',
+                'unlink': 'Un-register',
+                'accept': 'Accept',
+                'reject': 'Reject',
+                'accepted': 'Accepted',
+                'rejected': 'Rejected',
+                'quick-view': 'Quick View'
+            });
+            $translateProvider.translations('ru', {
+                'event-photo-gallery': 'Event Photo Gallery',
+                'save-changes': 'Сохранить Изменения',
+                'events': 'Мероприятия',
+                'ended-events': 'Прошедшие Мероприятия',
+                'cancel-registration': 'Отменить регистрацию',
+                'event-type': 'Тип Мероприятия',
+                'chicago-community-events': 'Афиша Чикаго',
+                'chicago-community-event': 'Мероприятие Чикаго',
+                'connection-event': 'Бизнес-Мероприятие',
+                'public-event': 'Публичное Мероприятие',
+                'all-events': 'Афиша Чикаго',
+                'activity-events': 'События и Мероприятия',
+                'purchase-tickets': 'Приобрести билеты',
+                'upcoming-events': 'Ближайшие События',
+                'visited-events': ' Посещенные Мероприятия',
+                'planned-events': 'Запланированные  Мероприятия',
+                'create-event': 'Создать Мероприятие',
+                'new-event': 'Новое Мероприятие',
+                'public-events': 'Открытые Мероприятия',
+                'network-events': 'Бизнес Мероприятия',
+                'friends': 'Друзья',
+                'events-calendar': 'Афиша 2015',
+                'families-event': 'Семей Придут',
+                'join-tip': 'Кликните чтобы зарегистрироваться',
+                'unlink-tip': 'Отменить регистрацию на посещение',
+                'join': 'Пойду',
+                'unlink': 'Отменить',
+                'accept': 'Принять',
+                'reject': 'Отклонить',
+                'accepted': 'Принят',
+                'rejected': 'Отклонен',
+                'quick-view': 'Быстрый просмотр'
+            });
+            $translateProvider.preferredLanguage('en');
+        }]);
+})();

@@ -1,0 +1,56 @@
+div
+    div.bgc-grey-200(class='pl+ pr+ pt+ pb')
+        sv-profile-subhead(subhead-title="new-classified")
+    form(class='p+'  name='classifiedForm' novalidate flex-container='column' ng-submit='postClassified(clCopy, classifiedForm.$valid)' sv-form-val)
+        div(layout='row', layout-sm='column')
+            md-input-container(flex)
+                label {{'contact-name'|translate}}
+                input(ng-model='clCopy.name' name='name')
+            md-input-container(flex)
+                label {{'contact-phone'|translate}}
+                input(ng-model='clCopy.phone' name='phone')
+            md-input-container(flex)
+                label {{'contact-email'|translate}}
+                input(ng-model='clCopy.email' name='email' )
+        div(layout-gt-sm='row', layout-sm='column'  layout-align-gt-sm='center end')
+            md-input-container.mr(flex)
+                label {{'city'|translate}}
+                input(ng-model='clCopy.city' name='city')
+            md-input-container(flex)
+                label {{'state'|translate}}
+                input(ng-model='clCopy.state' name='state' required='')
+            md-input-container(class="mr ml" flex)
+                md-select(name="section" ng-model='clCopy.section' style='margin-top:4px;padding-top:24px;padding-bottom:0px;text-align:left' required)
+                    md-select-label.tc-teal-400
+                        i.mdi.mdi-checkbox-marked-outline.mb(style='max-width:22px') &nbsp
+                        | {{clCopy.section || 'classified-section'|translate}}
+                    md-option(ng-repeat='s in sections track by $index' ng-value='s.$value' style='height:38px')
+                        .fs-body-2 {{s.$value|capitalize}}
+        div(layout='row', layout-sm='column')
+            md-input-container(flex)
+                label {{'classified-title'|translate}}
+                input(ng-model='clCopy.title' sv-url-decode name='title' required='')
+        div(layout='row', layout-sm='column')
+            md-input-container(flex)
+                label {{'classified-description'|translate}}
+                textarea.bgc-grey-50(ng-model='clCopy.description'
+                sv-url-decode
+                rows='3'
+                name='description')
+        div(layout='row', layout-sm='column')
+            md-input-container(flex)
+                label {{'price'|translate}}
+                input(ng-model='clCopy.price'
+                sv-url-decode
+                name='price')
+        div(layout='row' layout-align='start center')
+            md-checkbox(ng-model='clCopy.acceptClassifiedPolicy' aria-label='terms')
+            div
+                a.fs-body-2(style='border-bottom: #393939 1px dotted; line-height:14px; cursor:pointer' ng-click="termsConditionsClassifiedModal()") I have read and accept Classified Terms and Conditions
+        div.bgc-grey-100(class='pl+ pr+ pt+ pb' layout="row")
+            button.btn.btn--s.btn--raised.btn--grey.m( type='submit' lx-ripple value="Post" ng-disabled='!clCopy.acceptClassifiedPolicy')
+                i.mdi.mdi-send.mr
+                | {{editState?'save':'post'|translate}}
+            button.btn.btn--s.btn--raised.btn--white.m(type='button' lx-ripple ng-click='cancelAddition()')
+                i.mdi.mdi-close
+                | &nbsp {{'cancel'|translate}}

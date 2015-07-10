@@ -1,0 +1,6 @@
+.card.p(ng-if='cls')
+    span.display-block.fs-headline
+        i.mdi.mdi-tag-faces.mr
+        | {{'bonuses'|translate}}:
+    span.display-block.fs-body-2.tc-red-200.mb {{'free-classified'|translate}} {{leftToPost}} {{'classified'|translate}}
+    button.btn.btn--xs.btn--flat.btn--grey.mb.bgc-grey-300.tc-grey-800(lx-ripple="" ng-click='startCl()') {{'start-posting-classified'|translate}}

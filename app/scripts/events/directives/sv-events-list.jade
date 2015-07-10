@@ -1,0 +1,8 @@
+div
+    div(layout='row' class='mb+')
+        button.btn.btn--xs.btn--grey.btn--flat.tc-red-400(lx-ripple='' ng-click='svShowEvetsFrom("future")') {{'active-events'|translate}}
+        span.fs-subhead.mr.ml |
+        button.btn.btn--xs.btn--grey.btn--flat.tc-grey-700(lx-ripple='' ng-click='svShowEvetsFrom("past")') {{'ended-events'|translate}}
+    div(class='mb+' ng-repeat='event in events|orderBy:"-$id"|eventsType:eventFilter|previosFutureFr:isFuture'
+    layout-gt-sm="row" layout-sm='column' layout-align-gt-sm="space-between center")
+        sv-one-event-thumb(event='event')

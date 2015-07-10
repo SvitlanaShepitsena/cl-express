@@ -1,0 +1,28 @@
+.card
+    div.bgc-grey-200(class='pl+ pr+ pt pb')
+        span.display-block.fs-headline.mb(class='mb+ mt+') {{headerTitle|translate}}
+    div(class='p+')
+        form.mt(name='signUpForm' novalidate sv-form-val)
+            md-input-container
+                label {{'name'|translate}}
+                input(type='text' name='userName'  ng-model='user.userName' sv-unique-username ng-minlength="3" ng-maxlength="200" required="error" )
+            md-input-container
+                label {{'email'|translate}}
+                input(type='email' ng-model='user.email' name='email' required)
+            md-input-container
+                label {{'password'|translate}}
+                input(type='password' ng-minlength="6" ng-maxlength="200" ng-model='user.password' name='password' required)
+        div(layout='row' layout-align='start center' )
+            md-checkbox(ng-model='user.acceptPolicy' aria-label='terms')
+            a.dispaly-block.fs-body-2(style='border-bottom: #393939 1px dotted; line-height:14px; cursor:pointer' ng-click="termsConditionsModal()") {{conditions|translate}}
+    div.bgc-white-1(class='p+')
+        div(layout='row' class="mb+")
+            button.btn.btn--s.btn--raised.btn--white(lx-ripple ng-click='createSvetUser()' ng-disabled='!user.acceptPolicy')
+                i.mdi.mdi-check &nbsp
+                | {{register|translate}}
+    div.bgc-grey-50(layout='row' layout-align='space-between center' class='p+')
+        div.display-block.fs-body-1 {{registered|translate}}  &nbsp
+        button.btn.btn--s.btn--flat.fs-caption.btn--indigo(lx-ripple ui-sref='app.cbi-login') {{login|translate}}
+    div.bgc-grey-200(layout='row' layout-align='center center' class='p+')
+        sv-form-social-buttons
+

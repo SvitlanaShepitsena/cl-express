@@ -1,0 +1,10 @@
+.card
+    a.tc-grey-800(ui-sref='{{albumUrl}}' ng-click="closeSideBar()")
+        .card__img.card__img--top(style='padding:0px !important')
+            img(ng-src="{{albumImg}}")
+            span.mdc-display-inline-block.fs-title.tc-white.bgc-white.sv-color-8(style='padding:0px 8px;margin: 0px -15px') {{albumTitle}}
+            span.mdc-display-inline-block.fs-title.tc-white.bgc-grey-900.sv-color-7(style='padding:0px 8px;margin: 0px -15px') {{albumTitle}}
+        div(class='p+')
+            .fs-subhead {{albumSubhead}}
+            .paragraph.fs-body-1.mb
+                | {{albumBody}}

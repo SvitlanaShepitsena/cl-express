@@ -1,0 +1,14 @@
+md-content
+    md-tabs(md-selected='selectedIndex', md-border-bottom='' md-dynamic-height=""  md-stretch-tabs="never")
+        md-tab
+            md-tab-label All Events
+            md-tab-body
+                sv-events-list(event-filter="all" events='events')
+        md-tab
+            md-tab-label Public Events
+            md-tab-body
+                sv-events-list(event-filter="public" events='events')
+        md-tab
+            md-tab-label Business Events
+            md-tab-body
+                sv-events-list(event-filter="connection" events='events')

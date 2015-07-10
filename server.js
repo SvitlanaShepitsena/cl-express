@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
+
 var Firebase = require("firebase");
 
 var app = express();
@@ -21,33 +24,37 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use('/app', express.static(__dirname + '/app'));
+
 
 app.get('/', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
-    //console.log(userAgent);
-    //var ref = new Firebase('https://sv-app-test.firebaseio.com/agent');
-    //ref.set({
-    //    agent:userAgent
-    //});
-    //
-    //res.send(userAgent);
+    console.log(userAgent);
 
-
-    if (userAgent.indexOf('facebookexternalhit')!==-1) {
-
-        res.sendFile('index.html', {root: __dirname + '/app'});
+    if ((userAgent.indexOf('facebookexternalhit') <= -1)) {
+        console.log('angular');
+        res.redirect('/home');
 
     } else {
+
+        var vm = {
+            title: 'Our title'
+        }
 
         var ref = new Firebase('https://sv-app-test.firebaseio.com')
         ref.child("articles/-JrncbQ7s8q8Em6-myq-").on("value", function (snapshot) {
             var article = snapshot.val();
-            res.render('home.jade', {article: article});
+            res.render('home.jade', vm);
         });
     }
 });
+
+app.get('/home', function (req, res,next) {
+    res.sendFile('index.html', {root: __dirname + '/app'});
+    next();
+})
+app.use('/home', express.static(__dirname + '/app'));
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -81,5 +88,12 @@ app.use(function (err, req, res, next) {
 
 app.listen(5000, function () {
     console.log('listen on port 5000');
-})
+});
+
 module.exports = app;
+//var ref = new Firebase('https://sv-app-test.firebaseio.com/agent');
+//ref.set({
+//    agent:userAgent
+//});
+//
+//res.send(userAgent);
