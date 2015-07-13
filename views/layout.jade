@@ -1,14 +1,17 @@
 doctype html
 html
     head
-        title My title
+        title Your Company Information
         link(rel='stylesheet' href=' ../app/bower_components/angular-material/angular-material.min.css')
         link(rel='stylesheet' href=' ../app/bower_components/lumx/dist/lumx.css')
 
 
-        if vm !== undefined && vm.og !== undefined
+        if vm !== undefined && vm.og !== undefined && vm.og.title!==undefined
             meta(property='og:title' content='#{vm.og.title}')
+        if vm !== undefined && vm.og !== undefined && vm.og.img!==undefined
             meta(property='og:image' content='#{vm.og.img}')
+        if vm !== undefined && vm.og !== undefined && vm.og.description!==undefined
+            meta(property='og:description' content='#{vm.og.description}')
 
         link(rel='stylesheet' href=' ../app/styles/main.css')
     body

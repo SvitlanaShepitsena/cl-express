@@ -10,16 +10,16 @@ module.exports = function homeRouter(express) {
         var userAgent = req.get('user-agent');
         console.log(userAgent);
 
-        //if (userAgent.indexOf('facebookexternalhit') > -1) {
-        if (userAgent.indexOf('facebookexternalhit') === -1) {
+        if (userAgent.indexOf('facebookexternalhit') > -1) {
+        //if (userAgent.indexOf('facebookexternalhit') === -1) {
             next();
 
         } else {
             var vm = {
                 title: 'Home page title',
-                //og:{
-                //    title: 'OG'
-                //}
+                og:{
+                    description: 'Our Company provides great services for your business'
+                }
             };
 
             var ref = new Firebase('https://sv-app-test.firebaseio.com')
