@@ -30,7 +30,6 @@ app.get('/events/one-event-gallery/',galleryRouter);
 
 
 
-
 // --- Routes ---
 
 
