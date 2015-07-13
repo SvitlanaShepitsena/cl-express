@@ -2,18 +2,18 @@ doctype html
 html
     head
         title Your Company Information
-        link(rel='stylesheet' href=' ../app/bower_components/angular-material/angular-material.min.css')
-        link(rel='stylesheet' href=' ../app/bower_components/lumx/dist/lumx.css')
+        link(rel='stylesheet' href='/bower_components/angular-material/angular-material.min.css')
+        link(rel='stylesheet' href='/bower_components/lumx/dist/lumx.css')
 
 
-        if vm !== undefined && vm.og !== undefined && vm.og.title!==undefined
+        if vm !== undefined && vm.og !== undefined && vm.og.title !== undefined
             meta(property='og:title' content='#{vm.og.title}')
-        if vm !== undefined && vm.og !== undefined && vm.og.img!==undefined
+        if vm !== undefined && vm.og !== undefined && vm.og.img !== undefined
             meta(property='og:image' content='#{vm.og.img}')
-        if vm !== undefined && vm.og !== undefined && vm.og.description!==undefined
+        if vm !== undefined && vm.og !== undefined && vm.og.description !== undefined
             meta(property='og:description' content='#{vm.og.description}')
 
-        link(rel='stylesheet' href=' ../app/styles/main.css')
+        link(rel='stylesheet' href='/styles/main.css')
     body
         div(style='width:1200px;margin:0px auto')
             include header/header

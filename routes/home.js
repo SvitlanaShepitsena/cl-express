@@ -17,7 +17,7 @@ module.exports = function homeRouter(express) {
         } else {
             var vm = {
                 title: 'Home page title',
-                og:{
+                og: {
                     description: 'Our Company provides great services for your business'
                 }
             };
@@ -32,8 +32,8 @@ module.exports = function homeRouter(express) {
         }
     });
 
+// CONSTANTS
     var appFolder = path.join(__dirname, '../app');
-
     homeRouter.use(express.static(appFolder));
 
     homeRouter.get('/', function (req, res) {

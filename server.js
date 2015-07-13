@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 // --- requires.routes ---
 var homeRouter = require('./routes/home')(express);
+var galleryRouter = require('./routes/gallery')(express);
 
 
 
@@ -25,6 +26,7 @@ var homeRouter = require('./routes/home')(express);
 
 // --- Routes ---
 app.use('/',homeRouter);
+app.get('/events/one-event-gallery/',galleryRouter);
 
 
 
@@ -42,19 +44,20 @@ if (app.get('env') === 'development') {
     });
 }
 
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    console.log(err.message);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 app.listen(5000, function () {
