@@ -3,7 +3,7 @@
     angular.module('app')
         .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-            //$urlRouterProvider.otherwise('/home');
+            $urlRouterProvider.otherwise('/');
 
             $stateProvider
                 .state("app", {
@@ -17,7 +17,7 @@
                     template: "<div ui-view=''></div>"
                 })
                 .state("app.home", {
-                    url: "/home",
+                    url: "/",
                     resolve: {
                         svetNewsPromise: function (ArticlesServ) {
                             return ArticlesServ.setHomeNewsLive();
