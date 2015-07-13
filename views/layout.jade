@@ -6,7 +6,7 @@ html
         link(rel='stylesheet' href=' ../app/bower_components/lumx/dist/lumx.css')
 
 
-        if vm !== undefined
+        if vm !== undefined && vm.og !== undefined
             meta(property='og:title' content='#{vm.og.title}')
             meta(property='og:image' content='#{vm.og.img}')
 
