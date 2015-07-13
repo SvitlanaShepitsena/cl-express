@@ -10,8 +10,8 @@ module.exports = function homeRouter(express) {
         var userAgent = req.get('user-agent');
         console.log(userAgent);
 
-        if (userAgent.indexOf('facebookexternalhit') > -1) {
-        //if (userAgent.indexOf('facebookexternalhit') === -1) {
+        //if (userAgent.indexOf('facebookexternalhit') > -1) {
+        if (userAgent.indexOf('facebookexternalhit') === -1) {
             next();
 
         } else {
