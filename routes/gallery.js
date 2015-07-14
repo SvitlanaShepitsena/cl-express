@@ -46,8 +46,8 @@ galleryRouter.get('/:id?', function (req, res, next) {
             }
 
             vm.og = {
-                title: 'Album Name',
-                img: bucketUrl + files[0]
+                title: 'My Image',
+                img: bucketUrl + files[paramId || 0]
             }
             res.render('gallery', {vm: vm});
         });
