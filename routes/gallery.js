@@ -7,11 +7,9 @@ var galleryRouter = express.Router();
 
 galleryRouter.get('/:id?', function (req, res, next) {
 
-
-
     var userAgent = req.get('user-agent');
-    if (userAgent.indexOf('facebookexternalhit') > -1) {
-    //if (userAgent.indexOf('facebookexternalhit') === -1) {
+    //if (userAgent.indexOf('facebookexternalhit') > -1) {
+    if (userAgent.indexOf('facebookexternalhit') === -1) {
         next();
     } else {
         console.log('node');

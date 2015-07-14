@@ -10,8 +10,8 @@ module.exports = function homeRouter(express) {
         var userAgent = req.get('user-agent');
         console.log(userAgent);
 
-        //if (userAgent.indexOf('facebookexternalhit') > -1) {
-        if (userAgent.indexOf('facebookexternalhit') === -1) {
+        if (userAgent.indexOf('facebookexternalhit') > -1) {
+        //if (userAgent.indexOf('facebookexternalhit') === -1) {
             next();
 
         } else {
@@ -22,7 +22,7 @@ module.exports = function homeRouter(express) {
                 }
             };
 
-        var ref = new Firebase('https://sv-app-test.firebaseio.com')
+            var ref = new Firebase('https://sv-app-test.firebaseio.com')
             ref.child("posts").on("value", function (snapshot) {
                 var posts = snapshot.val();
                 vm.posts = posts;
