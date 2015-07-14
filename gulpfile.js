@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var bs = require('browser-sync');
-var affected = require('gulp-jade-find-affected');
 var wiredep = require('wiredep').stream;
 var reload = bs.reload;
 
