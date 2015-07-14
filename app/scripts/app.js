@@ -49,7 +49,7 @@
         .config(function (ezfbProvider) {
             ezfbProvider.setInitParams({
                 //appId: '258826184311868',
-                appId: '1405000443143632',
+                appId: '112646825743889',
                 xfbml: true,
                 version: 'v2.3'
             });
