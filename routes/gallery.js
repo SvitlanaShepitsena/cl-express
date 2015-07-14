@@ -21,7 +21,7 @@ galleryRouter.get('/:id?', function (req, res, next) {
         var bucketUrl = "http://s3-us-west-2.amazonaws.com/chicagoview/";
 
         xmlToJson(bucketUrl, function (err, data) {
-            var filename;
+            var filename='';
             if (err) {
                 // Handle this however you like
                 return console.err(err);
@@ -46,8 +46,10 @@ galleryRouter.get('/:id?', function (req, res, next) {
             if (paramId) {
                 vm.activeImg = paramId;
                 filename = files[paramId];
-                var start = filename.indexOf('.');
-                filename = _.startCase(filename.substr(0, start));
+                if (filename) {
+                    var start = filename.indexOf('.');
+                    filename = _.startCase(filename.substr(0, start));
+                }
             }
 
             vm.og = {
