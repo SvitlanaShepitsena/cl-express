@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 /* Core node.js module to query list of images from AWS3. */
+var _ =require('lodash');
 var http = require('http');
 
 var galleryRouter = express.Router();
@@ -46,7 +47,7 @@ galleryRouter.get('/:id?', function (req, res, next) {
                 vm.activeImg = paramId;
                 filename = files[paramId];
                 var start = filename.indexOf('.');
-                filename = filename.substr(0, start);
+                filename = _.startCase(filename.substr(0, start));
             }
 
             vm.og = {
