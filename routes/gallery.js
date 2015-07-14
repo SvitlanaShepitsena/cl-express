@@ -40,6 +40,11 @@ galleryRouter.get('/:id?', function (req, res, next) {
             }
             vm.files = files;
 
+            var paramId = req.params.id;
+            if (paramId) {
+                vm.activeImg = paramId;
+            }
+
             vm.og = {
                 title: 'Album Name',
                 img: bucketUrl + files[0]

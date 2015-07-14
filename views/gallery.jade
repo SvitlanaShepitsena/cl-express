@@ -6,9 +6,13 @@ block content
         | Back
     span.fs-title.display-block.text-center Album Name
     ul.list-inline(class='row')
-        if vm !== undefined
-            each photo in vm.files
+         if vm !== undefined
+            if vm.activeImg === undefined
+                each photo in vm.files
+                    li.card.m(style='overflow:hidden;position:relative;width:180px' id='imgWrapper' )
+                        a(style='cursor:pointer')
+                             img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo}')
+            else
                 li.card.m(style='overflow:hidden;position:relative;width:180px' id='imgWrapper' )
-                    a(style='cursor:pointer')
-                        img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo}')
+                    img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{vm.files[vm.activeImg]}')
 
