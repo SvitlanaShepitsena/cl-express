@@ -17,15 +17,15 @@ html
 
         link(rel='stylesheet' href='/styles/main.css')
     body
-        div(style='width:1200px;margin:0px auto')
+        div(style='width:1280px;margin:0px auto')
             include header/header
-        div(style='width:1200px;margin:0px auto')
-            div(style='float:left;display:block;width:200px')
+        div(style='width:1280px;margin:0px auto')
+            .m(style='float:left;display:block;width:200px')
                 include menu/left-nav
                 span.fs-subhead.display-block.text-center.m My Photos
                 a()
                     img(src="https://s3-us-west-2.amazonaws.com/chicagopics/chicago-view-color.jpg" )
-            div(style='float:left;display:block;width:800px')
+            .m(style='float:left;display:block;width:800px;margin:0px auto')
                 block content
-            div(style='float:right;display:block;width:200px')
+            .m(style='float:right;display:block;width:200px')
                 include menu/right-nav
