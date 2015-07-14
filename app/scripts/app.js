@@ -51,7 +51,7 @@
                 //appId: '258826184311868',
                 appId: '112646825743889',
                 xfbml: true,
-                version: 'v2.3'
+                version: 'v2.4'
             });
         })
         .config(function ($mdThemingProvider, $mdIconProvider, $compileProvider) {
