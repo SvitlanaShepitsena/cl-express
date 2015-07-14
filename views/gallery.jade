@@ -1,13 +1,18 @@
 extends layout
 
 block content
-    div(layout-sm='column', layout-md='column', layout-gt-md='row', layout-lg='column', layout-gt-lg='column')
+    a.btn.btn--xs.btn--grey.btn--flat.mt(href='javascript:history.back()' id="linkBack")
+        i.fa.fa-arrow-left.mr
+        | Back
+    span.fs-title.display-block.text-center Album Name
+    ul.list-inline(class='row')
         if vm !== undefined
             if vm.activeImg === undefined
                 each photo in vm.files
-                    div.card(style='overflow:hidden;position:relative;width:800px' id='imgWrapper')
-                        img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo}')
+                    li.card.m(style='overflow:hidden;position:relative;width:180px' id='imgWrapper' )
+                        a(style='cursor:pointer')
+                            img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo}')
             else
-                div.card(style='overflow:hidden;position:relative;width:800px' id='imgWrapper')
+                li.card.m(style='width:180px' id='imgWrapper' )
                     img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{vm.files[vm.activeImg]}')
 
