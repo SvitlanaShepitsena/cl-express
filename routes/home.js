@@ -1,12 +1,9 @@
 var path = require('path');
 var Firebase = require('firebase');
 
-
-
 module.exports = function homeRouter(express) {
 
     var homeRouter = express.Router();
-
 
     homeRouter.get('/', function (req, res, next) {
 
@@ -25,7 +22,7 @@ module.exports = function homeRouter(express) {
                 }
             };
 
-            var ref = new Firebase('https://sv-app-test.firebaseio.com')
+        var ref = new Firebase('https://sv-app-test.firebaseio.com')
             ref.child("posts").on("value", function (snapshot) {
                 var posts = snapshot.val();
                 vm.posts = posts;
