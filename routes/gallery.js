@@ -9,18 +9,17 @@ var galleryRouter = express.Router();
 galleryRouter.get('/:id?', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
-    //if (userAgent.indexOf('facebookexternalhit') > -1) {
-    if (userAgent.indexOf('facebookexternalhit') === -1) {
+    if (userAgent.indexOf('facebookexternalhit') > -1) {
+    //if (userAgent.indexOf('facebookexternalhit') === -1) {
         next();
     } else {
-        console.log('node');
         var vm = {
             title: 'Event Gallery'
         }
 
         var bucketUrl = "http://s3-us-west-2.amazonaws.com/chicagoview/";
 
-        xmlToJson(bucketUrl, function (err, data) {
+        xmlBucketImgsParser(bucketUrl, function (err, data) {
             var filename = '';
             if (err) {
                 // Handle this however you like
@@ -40,12 +39,14 @@ galleryRouter.get('/:id?', function (req, res, next) {
                 }
                 match = myRegexp.exec(myString);
             }
+
             vm.files = files;
 
-            var paramId = req.params.id;
-            if (paramId) {
-                vm.activeImg = paramId;
-                filename = files[paramId];
+            var imgId = req.params.id;
+            /* if we open individual image*/
+            if (imgId) {
+                vm.activeImg = imgId;
+                filename = files[imgId];
                 if (filename) {
                     var start = filename.indexOf('.');
                     filename = _.startCase(filename.substr(0, start));
@@ -53,8 +54,8 @@ galleryRouter.get('/:id?', function (req, res, next) {
             }
 
             vm.og = {
-                title: filename,
-                img: bucketUrl + files[paramId || 0]
+                title: filename || "Gallery title",
+                img: bucketUrl + files[imgId || 0]
             }
             res.render('gallery', {vm: vm});
         });
@@ -68,7 +69,7 @@ galleryRouter.get('/:id?', function (req, res) {
     res.sendFile('index.html', {root: appFolder});
 });
 
-function xmlToJson(url, callback) {
+function xmlBucketImgsParser(url, callback) {
     var req = http.get(url, function (res) {
         var xml = '';
 
