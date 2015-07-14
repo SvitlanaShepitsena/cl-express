@@ -62,7 +62,6 @@ galleryRouter.get('/:id?', function (req, res, next) {
 
 var appFolder = path.join(__dirname, '../app');
 galleryRouter.use(express.static(appFolder));
-
 galleryRouter.get('/:id?', function (req, res) {
     res.sendFile('index.html', {root: appFolder});
 });
