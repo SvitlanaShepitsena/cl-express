@@ -5,11 +5,13 @@ var http = require('http');
 
 var galleryRouter = express.Router();
 
-galleryRouter.get('/:id', function (req, res, next) {
-    var userAgent = req.get('user-agent');
+galleryRouter.get('/:id?', function (req, res, next) {
 
+
+
+    var userAgent = req.get('user-agent');
     if (userAgent.indexOf('facebookexternalhit') > -1) {
-        //if (userAgent.indexOf('facebookexternalhit') === -1) {
+    //if (userAgent.indexOf('facebookexternalhit') === -1) {
         next();
     } else {
         console.log('node');
@@ -39,6 +41,7 @@ galleryRouter.get('/:id', function (req, res, next) {
                 match = myRegexp.exec(myString);
             }
             vm.files = files;
+
             vm.og = {
                 title: 'Album Name',
                 img: bucketUrl + files[0]
@@ -52,7 +55,7 @@ galleryRouter.get('/:id', function (req, res, next) {
 var appFolder = path.join(__dirname, '../app');
 galleryRouter.use(express.static(appFolder));
 
-galleryRouter.get('/:id', function (req, res) {
+galleryRouter.get('/:id?', function (req, res) {
     res.sendFile('index.html', {root: appFolder});
 });
 
