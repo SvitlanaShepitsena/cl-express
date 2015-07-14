@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 /* Core node.js module to query list of images from AWS3. */
-var _ =require('lodash');
+var _ = require('lodash');
 var http = require('http');
 
 var galleryRouter = express.Router();
@@ -9,8 +9,8 @@ var galleryRouter = express.Router();
 galleryRouter.get('/:id?', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
-    if (userAgent.indexOf('facebookexternalhit') > -1) {
-        //if (userAgent.indexOf('facebookexternalhit') === -1) {
+    //if (userAgent.indexOf('facebookexternalhit') > -1) {
+    if (userAgent.indexOf('facebookexternalhit') === -1) {
         next();
     } else {
         console.log('node');
@@ -21,7 +21,7 @@ galleryRouter.get('/:id?', function (req, res, next) {
         var bucketUrl = "http://s3-us-west-2.amazonaws.com/chicagoview/";
 
         xmlToJson(bucketUrl, function (err, data) {
-            var filename='';
+            var filename = '';
             if (err) {
                 // Handle this however you like
                 return console.err(err);
