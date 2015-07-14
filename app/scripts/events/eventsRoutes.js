@@ -42,7 +42,7 @@
                 })
 
                 .state("app.events.one-event-gallery", {
-                    url: "/one-event-gallery",
+                    url: "/one-event-gallery/:id",
                     controller: "One-event-galleryCtrl",
                     templateUrl: "scripts/events/views/one-event-galleryCtrl.html"
                 })

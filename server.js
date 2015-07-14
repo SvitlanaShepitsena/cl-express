@@ -1,38 +1,28 @@
+/*external*/
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 
-
 var app = express();
-// Jade to Html formatting
+// Jade to Html formatting on browser
 app.locals.pretty = true;
-// view engine setup
+
+// Managing Jade files
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
 
-// --- requires.routes ---
+/*local*/
 var homeRouter = require('./routes/home')(express);
-var galleryRouter = require('./routes/gallery')(express);
-
-
-
-// --- requires.routes ---
+var galleryRouter = require('./routes/gallery');
 
 // --- Routes ---
-app.use('/',homeRouter);
-app.get('/events/one-event-gallery/',galleryRouter);
+app.use('/', homeRouter);
+app.use('/events/one-event-gallery/', galleryRouter);
 
-
-
-// --- Routes ---
-
-
+/*Error-handling middleware*/
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
         res.status(err.status || 500);
@@ -42,7 +32,6 @@ if (app.get('env') === 'development') {
         });
     });
 }
-
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -62,6 +51,5 @@ app.use(function (err, req, res, next) {
 app.listen(5000, function () {
     console.log('listen on port 5000');
 });
-
 
 module.exports = app;

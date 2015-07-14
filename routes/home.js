@@ -1,9 +1,12 @@
 var path = require('path');
 var Firebase = require('firebase');
 
+
+
 module.exports = function homeRouter(express) {
 
     var homeRouter = express.Router();
+
 
     homeRouter.get('/', function (req, res, next) {
 
