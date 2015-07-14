@@ -3,9 +3,19 @@ var $ = require('gulp-load-plugins')();
 var bs = require('browser-sync');
 var wiredep = require('wiredep').stream;
 var reload = bs.reload;
+var nib = require('nib');
 
+var scripts = "app/scripts/";
 
-
+var onError = function (err) {
+    $.notify.onError({
+        title: "Gulp",
+        subtitle: "Failure!",
+        message: "Error: <%= error.message %>",
+        sound: "Beep"
+    })(err);
+    this.emit('end');
+};
 
 gulp.task('serve', ['browser-sync'], function () {
 
@@ -24,6 +34,7 @@ gulp.task('serve', ['browser-sync'], function () {
         }, 500);
     });
     gulp.watch('app/scripts/**/*.jade', ['jade-ang-watch']);
+    gulp.watch(["app/scripts/**/*.styl", "app/styles/**/*.styl"], ['stylus:main']);
 });
 
 gulp.task('jade-ang-watch', ['jade-ang'], bs.reload);
@@ -36,6 +47,28 @@ gulp.task('jade-ang', function () {
         .pipe(gulp.dest(jadeSrc))
 });
 
+
+
+gulp.task("stylus:scripts", function () {
+    return gulp.src(["app/scripts/**/*.styl"])
+        .pipe($.changed(scripts, {ext: '.css'}))
+        .pipe($.plumber({errorHandler: onError}))
+        .pipe($.stylus({use: [nib()]}))
+        .pipe(gulp.dest("./app/scripts/"))
+        .pipe(reload({stream: true}));
+    ;
+});
+
+gulp.task("stylus:main", ['stylus:scripts'], function () {
+    return gulp.src(["app/styles/**/*.styl",])
+        .pipe($.changed(scripts, {ext: '.css'}))
+        .pipe($.plumber({errorHandler: onError}))
+        .pipe($.stylus({use: nib()}))
+        .pipe(gulp.dest("./app/styles/"))
+        .pipe(reload({stream: true}));
+});
+
+
 gulp.task('browser-sync', ['nodemon'], function () {
     bs.init(null, {
         proxy: "http://localhost:5000",
@@ -45,6 +78,8 @@ gulp.task('browser-sync', ['nodemon'], function () {
         port: 7000,
     });
 });
+
+
 
 gulp.task('nodemon', function (cb) {
 

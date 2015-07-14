@@ -20,9 +20,7 @@
                         $scope.images = files;
 
                         if ($scope.activeImg) {
-
                             $scope.showGalleryModal($scope.activeImg);
-
                         }
 
                     });

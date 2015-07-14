@@ -12,6 +12,8 @@ md-dialog(style='min-width:100%;min-height:100%' class='bgc-grey-900' aria-label
             button.btn.btn--m.btn--icon.btn--white.tc-grey-300(ng-click='hide()')
                 i.mdi.mdi-close &nbsp
     md-dialog-content(style='padding:0px')
-        div(layout='row')
+        div(layout='column' layout-align="center center")
             div(style='margin:0px auto;position:relative' sv-image-scale)
                 img.animate-show(ng-src="{{currentImage}}" sv-fade-in='imgIndex'  style='margin:0px auto')
+            div.fb-padding
+                sv-fb-like
