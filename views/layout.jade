@@ -23,8 +23,10 @@ html
             .m(style='float:left;display:block;width:200px')
                 include menu/left-nav
                 span.fs-subhead.display-block.text-center.m My Photos
-                a()
-                    img(src="https://s3-us-west-2.amazonaws.com/chicagopics/chicago-view-color.jpg" )
+                .card
+                    a(style='cursor:pointer')
+                        img(src="https://s3-us-west-2.amazonaws.com/chicagopics/chicago-view-color.jpg" )
+                        .p Album info...
             .m(style='float:left;display:block;width:800px;margin:0px auto')
                 block content
             .m(style='float:right;display:block;width:200px')
