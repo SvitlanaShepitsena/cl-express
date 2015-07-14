@@ -8,11 +8,11 @@ block content
     ul.list-inline(class='row')
         if vm !== undefined
             if vm.activeImg === undefined
-                each photo in vm.files
-                    li.card.m(style='overflow:hidden;position:relative;width:180px' id='imgWrapper' )
-                        a(style='cursor:pointer')
-                            img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo}')
+                each photo,index in vm.files
+                    li.card.m(style='overflow:hidden;position:relative;width:180px')
+                        a(style='cursor:pointer' href='#{photo.url}')
+                            img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{photo.imgName}')
             else
-                li.card.m(style='width:180px' id='imgWrapper' )
-                    img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{vm.files[vm.activeImg]}')
+                li.card.m
+                    img(src='http://s3-us-west-2.amazonaws.com/chicagoview/#{(vm.files[vm.activeImg]).imgName}')
 
