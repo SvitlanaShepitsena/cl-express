@@ -18,6 +18,14 @@ var galleryRouter = require('./routes/gallery');
 app.use('/', homeRouter);
 app.use('/events/one-event-gallery/', galleryRouter);
 
+// Tranfer any unrecognized route to Angular
+var appFolder = path.join(__dirname, './app');
+app.use(express.static(appFolder));
+app.get('/*', function (req, res) {
+    res.sendFile('index.html', {root: appFolder});
+});
+// END Tranfer any unrecognized route to Angular
+
 /*Error-handling middleware*/
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
