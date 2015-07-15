@@ -1,5 +1,6 @@
 var path = require('path');
 
+var userAgentServ = require('../services/UserAgentServ');
 module.exports = function aboutUs(express) {
 
     var aboutUsRouter = express.Router();
@@ -8,17 +9,13 @@ module.exports = function aboutUs(express) {
 
         var userAgent = req.get('user-agent');
 
-        //if (userAgent.indexOf('facebookexternalhit') > -1) {
-        if (userAgent.indexOf('facebookexternalhit') === -1 && userAgent.indexOf('Trident') === -1) {
-            next();
-
-        } else {
+        if (userAgentServ.amIBot(userAgent)) {
 
             var rootUrl = (req.protocol || 'http') + '://' + req.get('host');
             console.log(rootUrl);
             /*create a view-model for fb crawler*/
             var vm = {
-                rootUrl:rootUrl,
+                rootUrl: rootUrl,
                 title: 'About us Page Title',
                 og: {
                     title: 'About us',
@@ -27,6 +24,9 @@ module.exports = function aboutUs(express) {
             };
 
             res.render('about', {vm: vm});
+        } else {
+            next();
+
         }
     });
 

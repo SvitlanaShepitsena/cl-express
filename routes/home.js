@@ -1,5 +1,6 @@
 var path = require('path');
 var firebaseServ = require('../services/FirebaseServ');
+var userAgentServ = require('../services/UserAgentServ');
 
 module.exports = function homeRouter(express) {
 
@@ -10,23 +11,18 @@ module.exports = function homeRouter(express) {
         var userAgent = req.get('user-agent');
         console.log(userAgent);
 
-        //if (userAgent.indexOf('facebookexternalhit') > -1) {
-        if (userAgent.indexOf('facebookexternalhit') === -1 && userAgent.indexOf('Trident') === -1 ) {
-            next();
-
-        } else {
+        if (userAgentServ.amIBot(userAgent)) {
             /*create a view-model for fb crawler*/
 
             var rootUrl = (req.protocol || 'http') + '://' + req.get('host');
             console.log(rootUrl);
             var vm = {
-                rootUrl:rootUrl,
+                rootUrl: rootUrl,
                 title: 'Home page title',
                 og: {
                     description: 'Our Company provides great services for your business'
                 }
             };
-
 
             var postsUrl = 'https://sv-app-test.firebaseio.com/posts';
             firebaseServ.getAll(postsUrl).then(function (data) {
@@ -35,6 +31,9 @@ module.exports = function homeRouter(express) {
             }, function (Error) {
                 console.log(Error.message);
             });
+        } else {
+            next();
+
         }
     });
 

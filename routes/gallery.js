@@ -3,16 +3,15 @@ var path = require('path');
 /* Core node.js module to query list of images from AWS3. */
 var _ = require('lodash');
 var http = require('http');
+var userAgentServ = require('../services/UserAgentServ');
 
 var galleryRouter = express.Router();
 
 galleryRouter.get('/:id?', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
-    //if (userAgent.indexOf('facebookexternalhit') > -1) {
-    if (userAgent.indexOf('facebookexternalhit') === -1 && userAgent.indexOf('Trident') === -1 ) {
-        next();
-    } else {
+
+    if (userAgentServ.amIBot(userAgent)) {
         var vm = {
             title: 'Event Gallery'
         }
@@ -80,6 +79,9 @@ galleryRouter.get('/:id?', function (req, res, next) {
             return convertedFile;
         }
 
+    } else {
+
+        next();
     }
 });
 
