@@ -1,11 +1,8 @@
 extends layout
+include mixins/home/post
 
 block content
     ul.list-unstyled
         if vm !== undefined
-            each post in vm.posts
-                li.card.m.md-padding
-                    span.display-block.fs-display-1.text-center !{post.title}
-                    md-divider(class='mt mb+')
-                    span.display-block.fs-title !{post.subtitle}
-                    p !{post.body}
+            each p in vm.posts
+                +post(p)

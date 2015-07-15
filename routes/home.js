@@ -1,5 +1,5 @@
 var path = require('path');
-var Firebase = require('firebase');
+var firebaseServ = require('../services/firebaseServ');
 
 module.exports = function homeRouter(express) {
 
@@ -11,10 +11,11 @@ module.exports = function homeRouter(express) {
         console.log(userAgent);
 
         //if (userAgent.indexOf('facebookexternalhit') > -1) {
-        if (userAgent.indexOf('facebookexternalhit') === -1) {
+        if (userAgent.indexOf('facebookexternalhit') === -1 && userAgent.indexOf('Trident') === -1 ) {
             next();
 
         } else {
+            /*create a view-model for fb crawler*/
             var vm = {
                 title: 'Home page title',
                 og: {
@@ -22,17 +23,18 @@ module.exports = function homeRouter(express) {
                 }
             };
 
-            var ref = new Firebase('https://sv-app-test.firebaseio.com')
-            ref.child("posts").on("value", function (snapshot) {
-                var posts = snapshot.val();
-                vm.posts = posts;
 
+            var postsUrl = 'https://sv-app-test.firebaseio.com/posts';
+            firebaseServ.getAll(postsUrl).then(function (data) {
+                vm.posts = data;
                 res.render('home', {vm: vm});
+            }, function (Error) {
+                console.log(Error.message);
             });
         }
     });
 
-// CONSTANTS
+    /*Redirect user to AngularJs App*/
     var appFolder = path.join(__dirname, '../app');
     homeRouter.use(express.static(appFolder));
 

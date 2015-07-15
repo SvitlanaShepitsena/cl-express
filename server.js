@@ -10,7 +10,6 @@ app.locals.pretty = true;
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 
-
 /*local*/
 var homeRouter = require('./routes/home')(express);
 var galleryRouter = require('./routes/gallery');

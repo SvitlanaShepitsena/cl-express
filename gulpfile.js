@@ -75,7 +75,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
         browser: "google chrome",
         delay: 1000,
         notify: false,
-        port: 7000,
+        port: 7000
     });
 });
 

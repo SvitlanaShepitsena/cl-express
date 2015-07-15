@@ -10,7 +10,7 @@ galleryRouter.get('/:id?', function (req, res, next) {
 
     var userAgent = req.get('user-agent');
     //if (userAgent.indexOf('facebookexternalhit') > -1) {
-    if (userAgent.indexOf('facebookexternalhit') === -1) {
+    if (userAgent.indexOf('facebookexternalhit') === -1 && userAgent.indexOf('Trident') === -1 ) {
         next();
     } else {
         var vm = {
