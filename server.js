@@ -16,8 +16,8 @@ var aboutUsRouter = require('./routes/about')(express);
 var galleryRouter = require('./routes/gallery');
 
 // --- Routes ---
-app.use('/events/one-event-gallery', galleryRouter);
 app.use('/about', aboutUsRouter);
+app.use('/events/one-event-gallery', galleryRouter);
 app.use('/', homeRouter);
 
 // Tranfer any unrecognized route to Angular
