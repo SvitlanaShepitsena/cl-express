@@ -45,7 +45,7 @@ galleryRouter.get('/:id?', function (req, res, next) {
             vm.files = _.map(files, function (file, n) {
                 return {
                     imgName: file,
-                    url: fullUrl + n
+                    url: fullUrl + '/' + n
                 }
 
             });
@@ -53,7 +53,9 @@ galleryRouter.get('/:id?', function (req, res, next) {
 
             /*------------------------ Checking if image collection is requested or 1 image------------------------*/
             var imgId = req.params.id;
-
+            var rootUrl = (req.protocol || 'http') + '://' + req.get('host');
+            console.log(rootUrl);
+            vm.rootUrl = rootUrl;
             if (imgId) {
                 vm.activeImg = imgId;
                 var activeImageFileName = files[imgId];
