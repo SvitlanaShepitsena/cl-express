@@ -7,7 +7,7 @@ html
         link(rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css")
         link(rel='stylesheet' href='/bower_components/lumx/dist/lumx.css')
 
-
+        //If OG properties are defined they will be added to head/meta
         if vm !== undefined && vm.og !== undefined && vm.og.title !== undefined
             meta(property='og:title' content='#{vm.og.title}')
         if vm !== undefined && vm.og !== undefined && vm.og.img !== undefined

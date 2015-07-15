@@ -6,7 +6,9 @@
             return {
                 replace: true,
                 templateUrl: 'scripts/sections/about/directives/sv-about-your-business.html',
-                scope: {},
+                scope: {
+                    companyName:'@'
+                },
                 link: function ($scope, el, attrs) {
 
                 }

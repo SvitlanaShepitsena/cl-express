@@ -12,11 +12,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 /*local*/
 var homeRouter = require('./routes/home')(express);
+var aboutUsRouter = require('./routes/about-us')(express);
 var galleryRouter = require('./routes/gallery');
 
 // --- Routes ---
-app.use('/', homeRouter);
 app.use('/events/one-event-gallery/', galleryRouter);
+app.use('/about-us/', aboutUsRouter);
+app.use('/', homeRouter);
 
 // Tranfer any unrecognized route to Angular
 var appFolder = path.join(__dirname, 'app');

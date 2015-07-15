@@ -16,7 +16,11 @@ module.exports = function homeRouter(express) {
 
         } else {
             /*create a view-model for fb crawler*/
+
+            var rootUrl = (req.protocol || 'http') + '://' + req.get('host');
+            console.log(rootUrl);
             var vm = {
+                rootUrl:rootUrl,
                 title: 'Home page title',
                 og: {
                     description: 'Our Company provides great services for your business'
