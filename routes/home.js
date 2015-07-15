@@ -1,5 +1,5 @@
 var path = require('path');
-var firebaseServ = require('../services/firebaseServ');
+var firebaseServ = require('../services/FirebaseServ');
 
 module.exports = function homeRouter(express) {
 
