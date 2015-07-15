@@ -12,9 +12,12 @@
                     showFeedbackModal: '&'
                 },
                 link: function ($scope, el, attrs) {
+                    if (userAuth.profile) {
+
                     $scope.user = userAuth.profile;
                     $scope.user.key = userAuth.key;
                     $scope.isEditState = false;
+                    }
 
                     $scope.editFeedback = function () {
                         feedbackConst.feedback = angular.copy($scope.feedback);

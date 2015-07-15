@@ -4,7 +4,7 @@ module.exports = function aboutUs(express) {
 
     var aboutUsRouter = express.Router();
 
-    aboutUsRouter.get('/', function (req, res, next) {
+    aboutUsRouter.get('/info', function (req, res, next) {
 
         var userAgent = req.get('user-agent');
 
@@ -26,7 +26,7 @@ module.exports = function aboutUs(express) {
                 }
             };
 
-            res.render('about-us', {vm: vm});
+            res.render('about', {vm: vm});
         }
     });
 
@@ -34,7 +34,7 @@ module.exports = function aboutUs(express) {
     var appFolder = path.join(__dirname, '../app');
     aboutUsRouter.use(express.static(appFolder));
 
-    aboutUsRouter.get('/', function (req, res) {
+    aboutUsRouter.get('/info', function (req, res) {
         res.sendFile('index.html', {root: appFolder});
     });
     return aboutUsRouter;

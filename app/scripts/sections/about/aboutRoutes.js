@@ -6,17 +6,17 @@
             $stateProvider
 
                 .state("app.about", {
-                    url: "/about",
                     abstract: true,
+                    url: "/about",
                     controller: "AboutCtrl",
                     templateUrl: "scripts/sections/about/views/aboutCtrl.html"
                 })
                 .state("app.about.about-tab-content", {
-                    url: "/about-tab-content",
+                    url: "/info",
                     templateUrl: "scripts/sections/about/views/about-tab-contentCtrl.html"
                 })
                 .state("app.about.testimonials-tab-content", {
-                    url: "/testimonials-tab-content",
+                    url: "/testimonials",
                     controller: "TestimonialsTabContentCtrl",
                     templateUrl: "scripts/sections/about/views/testimonials-tab-contentCtrl.html"
                 })
