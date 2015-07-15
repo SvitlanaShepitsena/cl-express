@@ -19,7 +19,7 @@ app.use('/', homeRouter);
 app.use('/events/one-event-gallery/', galleryRouter);
 
 // Tranfer any unrecognized route to Angular
-var appFolder = path.join(__dirname, './app');
+var appFolder = path.join(__dirname, 'app');
 app.use(express.static(appFolder));
 app.get('/*', function (req, res) {
     res.sendFile('index.html', {root: appFolder});
