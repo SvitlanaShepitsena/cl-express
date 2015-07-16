@@ -8,6 +8,32 @@
 
 <url>
   <loc>http://cl-express.herokuapp.com/</loc>
-  <lastmod>2015-07-16T19:18:51+00:00</lastmod>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/about/info</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/0</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/1</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/2</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/3</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/4</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/5</loc>
+</url>
+<url>
+  <loc>http://cl-express.herokuapp.com/events/one-event-gallery/6</loc>
 </url>
 </urlset>
