@@ -2,6 +2,7 @@ var bots=[
     'facebookexternalhit',
     'Googlebot',
     'Bingbot',
+    'sitemaps',
     'Trident'
 ]
 module.exports = {

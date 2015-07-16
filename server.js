@@ -5,7 +5,7 @@ var http = require('http');
 var app = express();
 // Jade to Html formatting on browser
 app.locals.pretty = true;
-
+app.disable('x-powered-by');
 // Managing Jade files
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
